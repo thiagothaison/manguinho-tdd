@@ -227,4 +227,26 @@ describe("SignUp Controller", () => {
       password: "anypassword",
     });
   });
+
+  test("Should return 200 if valid data is provided", () => {
+    const { sut } = makeSut();
+
+    const request = {
+      body: {
+        name: "any name",
+        email: "any@email.com",
+        password: "anypassword",
+        passwordConfirmation: "anypassword",
+      },
+    };
+    const response = sut.handle(request);
+
+    expect(response.statusCode).toBe(200);
+    expect(response.body).toEqual({
+      id: "valid_id",
+      name: request.body.name,
+      email: request.body.email,
+      password: request.body.password,
+    });
+  });
 });
