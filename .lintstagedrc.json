@@ -1,4 +1,4 @@
 {
-  "*.{js,ts}": ["yarn lint", "yarn test", "git add"],
+  "*.{js,ts}": ["yarn lint", "yarn test:staged", "git add"],
   "*.{json,md}": ["prettier --write", "git add"]
 }

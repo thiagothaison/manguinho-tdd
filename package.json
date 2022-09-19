@@ -8,7 +8,8 @@
   "license": "ISC",
   "scripts": {
     "lint": "eslint '*/**/*.ts' --quiet --fix",
-    "test": "jest --passWithNoTests",
+    "test": "jest --passWithNoTests --watch",
+    "test:staged": "jest --passWithNoTests",
     "postinstall": "husky install"
   },
   "dependencies": {
