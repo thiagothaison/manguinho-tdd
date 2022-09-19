@@ -22,6 +22,7 @@
     "eslint-plugin-unicorn"
   ],
   "rules": {
+    "no-restricted-syntax": "off",
     "no-unused-vars": "off",
     "@typescript-eslint/no-unused-vars": [
       "warn", // or "error"
@@ -64,10 +65,7 @@
       "warn",
       {
         "newlinesBetween": "always",
-        "groups": [
-          "module",
-          ["parent", "sibling", "index"]
-        ],
+        "groups": ["module", ["parent", "sibling", "index"]],
         "alphabetize": {
           "order": "asc",
           "ignoreCase": true
