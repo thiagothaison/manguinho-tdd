@@ -17,12 +17,14 @@
     "postinstall": "husky install"
   },
   "dependencies": {
-    "ts-jest": "^29.0.1"
+    "ts-jest": "^29.0.1",
+    "validator": "^13.7.0"
   },
   "devDependencies": {
     "@commitlint/cli": "^17.0.3",
     "@commitlint/config-conventional": "^17.0.3",
     "@types/jest": "^29.0.3",
+    "@types/validator": "^13.7.6",
     "@typescript-eslint/eslint-plugin": "^5.37.0",
     "@typescript-eslint/parser": "^5.37.0",
     "eslint": "^8.20.0",
