@@ -8,8 +8,12 @@
   "license": "ISC",
   "scripts": {
     "lint": "eslint '*/**/*.ts' --quiet --fix",
-    "test": "jest --passWithNoTests --watch",
-    "test:staged": "jest --passWithNoTests",
+    "test": "jest --passWithNoTests --silent --noStackTrace --runInBand",
+    "test:verbose": "jest --passWithNoTests --runInBand",
+    "test:unit": "yarn test --watch -c jest-unit.config.js",
+    "test:integration": "yarn test --watch -c jest-integration.config.js",
+    "test:staged": "yarn test --findRelatedTests",
+    "test:ci": "yarn test --coverage",
     "postinstall": "husky install"
   },
   "dependencies": {
