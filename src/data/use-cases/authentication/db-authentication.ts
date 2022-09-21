@@ -27,8 +27,6 @@ export class DbAuthentication implements Authentication {
 
     if (!isMatch) return null;
 
-    await this.tokenGenerator.generate(account.id);
-
-    return null;
+    return this.tokenGenerator.generate(account.id);
   }
 }
