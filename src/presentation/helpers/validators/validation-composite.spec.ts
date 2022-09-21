@@ -1,3 +1,4 @@
+import { InvalidParamError } from "../../errors/invalid-param-error";
 import { MissingParamError } from "../../errors/missing-param-error";
 import { Validation } from "./validation";
 import { ValidationComposite } from "./validation-composite";
@@ -33,5 +34,18 @@ describe("Validation Composite", () => {
     const error = sut.validate({});
 
     expect(error).toEqual(new MissingParamError("field"));
+  });
+
+  test("Should return the fist error if more than one validation fails", () => {
+    const { sut, validationStubs } = makeSut();
+    jest
+      .spyOn(validationStubs[0], "validate")
+      .mockReturnValueOnce(new InvalidParamError("field"));
+    jest
+      .spyOn(validationStubs[1], "validate")
+      .mockReturnValueOnce(new MissingParamError("field"));
+    const error = sut.validate({});
+
+    expect(error).toEqual(new InvalidParamError("field"));
   });
 });
