@@ -1,7 +1,7 @@
 /* istanbul ignore file */
 import { EmailValidator } from "../../controllers/signup/signup-protocols";
 import { InvalidParamError } from "../../errors";
-import { Validation } from "./validation";
+import { Validation } from "../../protocols/validation";
 
 export class EmailValidation implements Validation {
   constructor(
