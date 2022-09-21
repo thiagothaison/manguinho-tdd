@@ -1,5 +1,5 @@
 import { MissingParamError, ServerError } from "../../errors";
-import { ok, serverError, badRequest } from "../../helpers/http-helper";
+import { ok, serverError, badRequest } from "../../helpers/http/http-helper";
 import { SignUpController } from "./signup";
 import {
   AccountModel,

@@ -5,7 +5,7 @@ import {
   serverError,
   unauthorized,
   ok,
-} from "../../helpers/http-helper";
+} from "../../helpers/http/http-helper";
 import { LoginController } from "./login";
 import { HttpRequest, Validation } from "./login-protocols";
 
