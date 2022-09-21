@@ -24,7 +24,7 @@ describe("Bcrypter", () => {
   test("Should call bcrypt with correct values", async () => {
     const { salt, sut } = makeSut();
     const hashSpy = jest.spyOn(bcrypt, "hash");
-    await sut.encrypt("any_value");
+    await sut.hash("any_value");
 
     expect(hashSpy).toHaveBeenCalledWith("any_value", salt);
   });
@@ -35,7 +35,7 @@ describe("Bcrypter", () => {
       throw new Error();
     });
 
-    const promise = sut.encrypt("any_value");
+    const promise = sut.hash("any_value");
 
     await expect(promise).rejects.toThrow();
   });
