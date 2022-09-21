@@ -1,8 +1,6 @@
 import {
   Authentication,
   AuthenticationModel,
-} from "../../../domain/use-cases/authentication";
-import {
   HashComparer,
   TokenGenerator,
   LoadAccountByEmailRepository,
