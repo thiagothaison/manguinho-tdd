@@ -1,4 +1,3 @@
-/* istanbul ignore file */
 import { Validation } from "./validation";
 
 export class ValidationComposite implements Validation {
