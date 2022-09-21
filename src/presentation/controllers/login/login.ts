@@ -6,10 +6,14 @@ import {
   HttpRequest,
   HttpResponse,
   EmailValidator,
+  Authentication,
 } from "./login-protocols";
 
 export class LoginController implements Controller {
-  constructor(private readonly emailValidator: EmailValidator) {}
+  constructor(
+    private readonly emailValidator: EmailValidator,
+    private readonly authentication: Authentication
+  ) {}
 
   async handle(request: HttpRequest): Promise<HttpResponse> {
     try {
@@ -21,13 +25,15 @@ export class LoginController implements Controller {
         }
       }
 
-      const { email } = request.body;
+      const { email, password } = request.body;
 
       const isValid = this.emailValidator.isValid(email);
 
       if (!isValid) {
         return badRequest(new InvalidParamError("email"));
       }
+
+      await this.authentication.auth(email, password);
 
       return new Promise((resolve) => resolve(ok({ foo: "bar" })));
     } catch (error) {
