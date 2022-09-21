@@ -1,4 +1,3 @@
-/* istanbul ignore file */
 import { MissingParamError } from "../../errors";
 import { Validation } from "./validation";
 
