@@ -2,6 +2,12 @@ import jwt from "jsonwebtoken";
 
 import { JwtAdapter } from "./jwt-adapter";
 
+jest.mock("jsonwebtoken", () => ({
+  async sign(): Promise<string> {
+    return "hash";
+  },
+}));
+
 interface SutTypes {
   sut: JwtAdapter;
   secret: string;
@@ -21,5 +27,12 @@ describe("Jwt Adapter", () => {
     await sut.encrypt("any-id");
 
     expect(signSpy).toHaveBeenCalledWith({ id: "any-id" }, secret);
+  });
+
+  test("Should return a token on sign success", async () => {
+    const { sut } = makeSut();
+    const token = await sut.encrypt("any-id");
+
+    expect(token).toBe("hash");
   });
 });
