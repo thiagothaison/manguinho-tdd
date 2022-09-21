@@ -1,4 +1,5 @@
-import { MissingParamError } from "../../errors/missing-param-error";
+/* istanbul ignore file */
+import { MissingParamError } from "../../errors";
 import { Validation } from "./validation";
 
 export class RequiredFieldValidation implements Validation {
