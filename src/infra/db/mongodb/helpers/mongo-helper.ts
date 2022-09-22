@@ -1,4 +1,4 @@
-import { MongoClient, Collection } from "mongodb";
+import { MongoClient, Collection, ObjectId } from "mongodb";
 
 export const mongoHelper = {
   client: null as MongoClient,
@@ -20,6 +20,10 @@ export const mongoHelper = {
     }
 
     return this.client.db().collection(name);
+  },
+
+  toId(id: string): ObjectId {
+    return new ObjectId(id);
   },
 
   map<T = unknown>(collection): T {
