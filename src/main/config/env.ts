@@ -1,6 +1,6 @@
 export default {
   mongoHost: process.env.MONGO_HOST || "localhost",
-  mongoPort: +process.env.MONGO_PORT || 27018,
+  mongoPort: +process.env.MONGO_PORT || 27017,
   mongoDatabaseName: process.env.MONGO_HOST || "clean-node-api",
 
   getMongoUrl() {

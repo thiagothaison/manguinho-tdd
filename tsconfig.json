@@ -8,12 +8,13 @@
     "emitDecoratorMetadata": true,
     "module": "commonjs",
     "baseUrl": "./src",
-    "paths": {
-    },
+    "paths": {},
     "resolveJsonModule": true,
     "outDir": "./dist/",
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "skipLibCheck": true
-  }
+  },
+  "include": ["src"],
+  "exclude": ["**/*.spec.ts", "**/*.test.ts"]
 }
