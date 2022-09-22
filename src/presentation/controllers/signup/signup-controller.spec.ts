@@ -5,6 +5,8 @@ import {
   AccountModel,
   AddAccount,
   AddAccountModel,
+  Authentication,
+  AuthenticationModel,
   HttpRequest,
   Validation,
 } from "./signup-controller-protocols";
@@ -13,6 +15,7 @@ interface SutTypes {
   sut: SignUpController;
   addAccountStub: AddAccount;
   validationStub: Validation;
+  authenticationStub: Authentication;
 }
 
 const makeFakeRequest = (): HttpRequest => ({
@@ -51,12 +54,28 @@ const makeValidation = (): Validation => {
   return new ValidationStub();
 };
 
+const makeAuthentication = (): Authentication => {
+  class AuthenticationStub implements Authentication {
+    async auth(authentication: AuthenticationModel): Promise<string> {
+      return "valid-token";
+    }
+  }
+
+  return new AuthenticationStub();
+};
+
 const makeSut = (): SutTypes => {
   const addAccountStub = makeAddAccount();
   const validationStub = makeValidation();
-  const sut = new SignUpController(addAccountStub, validationStub);
+  const authenticationStub = makeAuthentication();
 
-  return { sut, addAccountStub, validationStub };
+  const sut = new SignUpController(
+    addAccountStub,
+    validationStub,
+    authenticationStub
+  );
+
+  return { sut, addAccountStub, validationStub, authenticationStub };
 };
 
 describe("SignUp Controller", () => {
@@ -115,5 +134,17 @@ describe("SignUp Controller", () => {
     const response = await sut.handle(request);
 
     expect(response).toEqual(badRequest(new MissingParamError("any-field")));
+  });
+
+  test("Should call Authentication with correct values", async () => {
+    const { sut, authenticationStub } = makeSut();
+    const httpRequest = makeFakeRequest();
+    const isValidSpy = jest.spyOn(authenticationStub, "auth");
+    await sut.handle(httpRequest);
+
+    expect(isValidSpy).toHaveBeenCalledWith({
+      email: httpRequest.body.email,
+      password: httpRequest.body.password,
+    });
   });
 });
