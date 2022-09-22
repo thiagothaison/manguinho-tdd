@@ -1,4 +1,10 @@
-import { badRequest, ok, serverError } from "../../helpers/http/http-helper";
+import { ConflictError } from "../../errors/conflict-error";
+import {
+  badRequest,
+  forbidden,
+  ok,
+  serverError,
+} from "../../helpers/http/http-helper";
 import {
   AddAccount,
   Authentication,
@@ -25,7 +31,11 @@ export class SignUpController implements Controller {
 
       const { name, email, password } = request.body;
 
-      await this.addAccount.add({ name, email, password });
+      const account = await this.addAccount.add({ name, email, password });
+
+      if (!account) {
+        return forbidden(new ConflictError("email"));
+      }
 
       const token = await this.authentication.auth({ email, password });
 
