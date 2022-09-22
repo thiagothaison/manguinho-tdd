@@ -9,8 +9,8 @@ import {
   unauthorized,
   ok,
 } from "../../helpers/http/http-helper";
-import { LoginController } from "./login";
-import { HttpRequest, Validation } from "./login-protocols";
+import { LoginController } from "./login-controller";
+import { HttpRequest, Validation } from "./login-controller-protocols";
 
 interface SutTypes {
   sut: LoginController;
