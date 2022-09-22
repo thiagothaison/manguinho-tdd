@@ -50,5 +50,17 @@ describe("Login Routes", () => {
         })
         .expect(200);
     });
+
+    test("Should return 401 on login fail", async () => {
+      const fakeAccount = makeFakeAccount();
+
+      await request(app)
+        .post("/api/login")
+        .send({
+          email: fakeAccount.email,
+          password: fakeAccount.password,
+        })
+        .expect(401);
+    });
   });
 });
