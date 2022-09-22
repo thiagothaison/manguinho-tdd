@@ -11,4 +11,6 @@ export default {
   },
 
   httpPort: process.env.HTTP_PORT || 5050,
+
+  jwtSecret: process.env.JWT_SECRET || "Yoda",
 };
