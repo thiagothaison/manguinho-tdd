@@ -1,4 +1,7 @@
-import { badRequest } from "../../../../../presentation/helpers/http/http-helper";
+import {
+  badRequest,
+  serverError,
+} from "../../../../../presentation/helpers/http/http-helper";
 import { AddSurveyController } from "./add-survey-controller";
 import {
   HttpRequest,
@@ -82,5 +85,17 @@ describe("Add Survey", () => {
     await sut.handle(request);
 
     expect(addSpy).toHaveBeenCalledWith(request.body);
+  });
+
+  test("Should returns 500 if AddSurvey use case throw", async () => {
+    const { sut, addSurveyStub } = makeSut();
+    jest
+      .spyOn(addSurveyStub, "add")
+      .mockReturnValueOnce(
+        new Promise((resolve, reject) => reject(new Error()))
+      );
+    const response = await sut.handle(makeFakeRequest());
+
+    expect(response).toEqual(serverError(new Error()));
   });
 });
