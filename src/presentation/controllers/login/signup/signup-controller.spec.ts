@@ -1,10 +1,10 @@
-import { ConflictError, MissingParamError, ServerError } from "../../errors";
+import { ConflictError, MissingParamError, ServerError } from "../../../errors";
 import {
   ok,
   serverError,
   badRequest,
   forbidden,
-} from "../../helpers/http/http-helper";
+} from "../../../helpers/http/http-helper";
 import { SignUpController } from "./signup-controller";
 import {
   AccountModel,

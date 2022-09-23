@@ -1,10 +1,10 @@
-import { ConflictError } from "../../errors/conflict-error";
+import { ConflictError } from "../../../errors/conflict-error";
 import {
   badRequest,
   forbidden,
   ok,
   serverError,
-} from "../../helpers/http/http-helper";
+} from "../../../helpers/http/http-helper";
 import {
   AddAccount,
   Authentication,

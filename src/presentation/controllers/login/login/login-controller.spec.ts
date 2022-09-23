@@ -1,14 +1,14 @@
 import {
   Authentication,
   AuthenticationModel,
-} from "../../../domain/use-cases/authentication";
-import { MissingParamError } from "../../errors/missing-param-error";
+} from "../../../../domain/use-cases/authentication";
+import { MissingParamError } from "../../../errors/missing-param-error";
 import {
   badRequest,
   serverError,
   unauthorized,
   ok,
-} from "../../helpers/http/http-helper";
+} from "../../../helpers/http/http-helper";
 import { LoginController } from "./login-controller";
 import { HttpRequest, Validation } from "./login-controller-protocols";
 
