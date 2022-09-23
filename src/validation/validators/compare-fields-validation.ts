@@ -1,6 +1,6 @@
 /* istanbul ignore file */
-import { InvalidParamError } from "../../errors";
-import { Validation } from "../../protocols/validation";
+import { InvalidParamError } from "../../presentation/errors";
+import { Validation } from "../../presentation/protocols/validation";
 
 export class CompareFieldsValidation implements Validation {
   constructor(
