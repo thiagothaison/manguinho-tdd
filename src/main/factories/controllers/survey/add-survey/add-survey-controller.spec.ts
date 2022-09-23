@@ -1,10 +1,16 @@
 import { badRequest } from "../../../../../presentation/helpers/http/http-helper";
 import { AddSurveyController } from "./add-survey-controller";
-import { HttpRequest, Validation } from "./add-survey-controller-protocols";
+import {
+  HttpRequest,
+  Validation,
+  AddSurvey,
+  AddSurveyModel,
+} from "./add-survey-controller-protocols";
 
 interface SutTypes {
   sut: AddSurveyController;
   validationStub: Validation;
+  addSurveyStub: AddSurvey;
 }
 
 const makeFakeRequest = (): HttpRequest => ({
@@ -29,11 +35,22 @@ const makeValidation = (): Validation => {
   return new ValidationStub();
 };
 
+const makeAddSurveyStub = () => {
+  class AddSurveyStub implements AddSurvey {
+    async add(survey: AddSurveyModel): Promise<void> {
+      return null;
+    }
+  }
+
+  return new AddSurveyStub();
+};
+
 const makeSut = (): SutTypes => {
   const validationStub = makeValidation();
-  const sut = new AddSurveyController(validationStub);
+  const addSurveyStub = makeAddSurveyStub();
+  const sut = new AddSurveyController(validationStub, addSurveyStub);
 
-  return { sut, validationStub };
+  return { sut, validationStub, addSurveyStub };
 };
 
 describe("Add Survey", () => {
@@ -55,5 +72,15 @@ describe("Add Survey", () => {
     const response = await sut.handle(request);
 
     expect(response).toEqual(badRequest(new Error()));
+  });
+
+  test("Should call AddSurvey with correct values", async () => {
+    const { sut, addSurveyStub } = makeSut();
+    const addSpy = jest.spyOn(addSurveyStub, "add");
+    const request = makeFakeRequest();
+
+    await sut.handle(request);
+
+    expect(addSpy).toHaveBeenCalledWith(request.body);
   });
 });
