@@ -1,6 +1,7 @@
 import {
   badRequest,
   serverError,
+  noContent,
 } from "../../../../../presentation/helpers/http/http-helper";
 import { AddSurveyController } from "./add-survey-controller";
 import {
@@ -97,5 +98,12 @@ describe("Add Survey", () => {
     const response = await sut.handle(makeFakeRequest());
 
     expect(response).toEqual(serverError(new Error()));
+  });
+
+  test("Should returns 204 on success", async () => {
+    const { sut } = makeSut();
+    const response = await sut.handle(makeFakeRequest());
+
+    expect(response).toEqual(noContent());
   });
 });
