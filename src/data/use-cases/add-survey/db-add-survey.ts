@@ -6,6 +6,7 @@ export class DbAddSurvey implements AddSurvey {
   constructor(private readonly addSurveyRepository: AddSurveyRepository) {}
 
   async add(survey: AddSurveyModel): Promise<void> {
+    console.log("survey", survey);
     await this.addSurveyRepository.add(survey);
   }
 }
