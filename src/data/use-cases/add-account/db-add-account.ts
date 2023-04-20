@@ -27,6 +27,8 @@ export class DbAddAccount implements AddAccount {
       password: hashedPassword,
     });
 
+    console.log('account', account)
+
     return account;
   }
 }
